@@ -64,7 +64,7 @@ class ModeleUserDAO
         }
     }
 
- 
+
     public static function updateUserData(string $fstname, string $name, string $mail)
     {
         $username = $_SESSION['login'];
@@ -98,8 +98,9 @@ class ModeleUserDAO
 
     private static function encryptData(string $dataToEncrypt)
     {
-        $iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($cipher = self::$cipher_Method));
-        $ciphertext_raw = openssl_encrypt($dataToEncrypt, $cipher, self::$enc_Key, $option = OPENSSL_RAW_DATA, $iv);
+        #$iv = openssl_random_pseudo_bytes(openssl_cipher_iv_length($cipher = self::$cipher_Method));
+        $iv = openssl_random_pseudo_bytes(16);
+        $ciphertext_raw = openssl_encrypt($dataToEncrypt, $cipher = self::$cipher_Method, self::$enc_Key, $option = OPENSSL_RAW_DATA, $iv);
         $hmac = hash_hmac('sha256', $ciphertext_raw, self::$enc_Key, $as_binary = true);
         $ciphertext = base64_encode($iv . $hmac . $ciphertext_raw);
 
@@ -247,7 +248,6 @@ class ModeleUserDAO
         $query->bindValue(':usrn', $login, PDO::PARAM_STR);
         $query->bindValue(':psw', $pHash, PDO::PARAM_STR);
         $query->execute();
-
     }
     //début fonction si un élève à un stage
     public static function getStage($login)
@@ -272,27 +272,26 @@ class ModeleUserDAO
         self::readAll();
         $user = self::getUser($login);
         if (isset($user)) {
-            try{
-            $query = Connexion::getInstance()->prepare('SELECT conventionElevePDF FROM stage WHERE idEtudiant = (SELECT id FROM etudiant WHERE idUser = :id)');
-            $query->bindValue(':id', $user->getId(), PDO::PARAM_INT);
-            $query->execute();
-            $res = $query->fetch();
-            $pdf_blob = $res['conventionElevePDF'];
-            
-            if($pdf_blob == ""){
-                return null;
-            }else{
-                $filename = 'convention_' . $user->getName() . "-" . $user->getFirstname() . '.pdf';
-                $file_path = './Data/PDFs/ConventionEleves/' . $filename;
-                file_put_contents($file_path, $pdf_blob);
-                
-                return $file_path;
-            }
-            }catch(Exception $e){
+            try {
+                $query = Connexion::getInstance()->prepare('SELECT conventionElevePDF FROM stage WHERE idEtudiant = (SELECT id FROM etudiant WHERE idUser = :id)');
+                $query->bindValue(':id', $user->getId(), PDO::PARAM_INT);
+                $query->execute();
+                $res = $query->fetch();
+                $pdf_blob = $res['conventionElevePDF'];
+
+                if ($pdf_blob == "") {
+                    return null;
+                } else {
+                    $filename = 'convention_' . $user->getName() . "-" . $user->getFirstname() . '.pdf';
+                    $file_path = './Data/PDFs/ConventionEleves/' . $filename;
+                    file_put_contents($file_path, $pdf_blob);
+
+                    return $file_path;
+                }
+            } catch (Exception $e) {
                 echo $e->getMessage();
                 return null;
             }
-            
         } else {
             return "User not found";
         }
