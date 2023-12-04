@@ -14,7 +14,8 @@ class Routeur{
         'updatePass' => 'ctrlUpdatePass.php',
         'viewUsers' => 'ctrlGestionE.php', 
         'register' => 'ctrlRegister.php',
-        'modifUser' => 'ctrlModifUser.php'
+        'modifUser' => 'ctrlModifUser.php',
+        'stage' => 'ctrlStage.php'
         );    
     
         
