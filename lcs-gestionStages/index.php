@@ -14,3 +14,4 @@
 
 
     include "$racine/controleur/$controleur";
+    include "$racine/modele/modeleStage.php";
