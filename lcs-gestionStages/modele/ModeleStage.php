@@ -11,8 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $maitreStage = $_POST['maitreStage'];
     $profRef = $_POST['profRef'];
+    $maitreStage = $_POST['maitreStage'];
     $mailMaitreStage = $_POST['mailMaitreStage'];
     $descriptionStage = $_POST['descriptionStage'];
     $commentMaitreStage = $_POST['commentMaitreStage'];
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
 
     // Enregistrement du stage dans la base de données
-    $sqlStage = "INSERT INTO stage (idEtudiant, idPeriode, idOrga, maitreStage, telMaitreStage, mailMaitreStage, descriptionStage, taches, avancementConvention) VALUES ('$etudiantId', '$periode', '$organisation', '$maitreDeStageMail', '$maitreDeStageTelephone', '$taches', '$avancementConvention')";
+    $sqlStage = "INSERT INTO stage (maitreStage, profRef, mailMaitreStage, descriptionStage, commentMaitreStage, adr, cP, ville, pays, conventionElevePDF, idEtudiant, idProf, idOrga, idPeriode, promo) VALUES ('$maitreStage', '$profRef', '$mailMaitreStage','$descriptionStage','$commentMaitreStage','$adr','$cP','$ville','$pays','$conventionElevePDF','$idEtudiant','$idProf','$idOrga','$idPeriode','$promo')";
     $conn->query($sqlStage);
 
     header("Location: modeleStage.php");

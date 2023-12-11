@@ -28,7 +28,8 @@
                     
                     <a class="topnav_link" href="./?action=defaut">Accueil</a>
                     <a class="topnav_link" href="./?action=mesInfos">Modifier les informations</a>
-                    <a class="topnav_link" href="./?action=stage">Stage</a>                                       <a class="topnav_link" href="./?action=logout">Se déconnecter</a>
+                    <a class="topnav_link" href="./?action=stage">Stage</a>                                       
+                    <a class="topnav_link" href="./?action=logout">Se déconnecter</a>
 
                     
                 </nav>

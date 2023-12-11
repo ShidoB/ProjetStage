@@ -16,6 +16,7 @@
             <option value=""></option>
             <option value="">   </option>
         </select>
+        <br/>
 
 
         <label for="maitreStage">Nom du maître de stage:</label>
