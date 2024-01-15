@@ -12,9 +12,9 @@
         <label for="promo">Promotion :</label>
         <select name="promo" required>
             <option value="">--Veuillez choisir une option--</option>
-            <option value=""></option>
-            <option value=""></option>
-            <option value="">   </option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
         </select>
         <br/>
 

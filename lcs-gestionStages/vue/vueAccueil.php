@@ -27,6 +27,14 @@
             </div>
         </div>
 
+         <div class="card_" onclick="location.href='./?action=stage'">
+            
+            <img src="./images/Document.webp" alt="gestionEleve">
+            <div class="wrapText">
+                <h1>Stages</h1>
+            </div>
+        </div>
+
         <?php 
             }
 
